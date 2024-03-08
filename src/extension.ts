@@ -1,17 +1,8 @@
 import * as vscode from 'vscode';
-import { setGlobalDispatcher, ProxyAgent } from "undici";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-	if (process.env.https_proxy) {
-		console.log("proxy setting was found, using it");
-		// Corporate proxy uses CA not in undici's certificate store
-		process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-		const dispatcher = new ProxyAgent({ uri: new URL(process.env.https_proxy).toString() });
-		setGlobalDispatcher(dispatcher);
-	}
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
