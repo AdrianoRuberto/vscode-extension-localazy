@@ -1,0 +1,78 @@
+{
+  "name": "localazy",
+  "displayName": "Localazy",
+  "description": "Connect to localazy",
+  "publisher": "AdrianoRuberto",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "url": "https://github.com/AdrianoRuberto/vscode-extension-localazy",
+    "type": "github"
+  },
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "icon": "./icon.png",
+  "contributes": {
+    "configuration": {
+      "title": "Localazy",
+      "properties": {
+        "localazy.languages": {
+          "type": "array",
+          "default": ["fr", "en", "de", "it"],
+          "description": "The languages that your project support. It will be asked a traduction for every languages"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "localazy.addKey",
+          "group": "Localazy"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "localazy.connect",
+        "title": "Localazy: Connect to Localazy"
+      },
+      {
+        "command": "localazy.addKey",
+        "title": "Localazy: Add key"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.87.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "undici": "^6.7.0"
+  }
+}
