@@ -3,7 +3,7 @@
   "displayName": "Localazy",
   "description": "Connect to localazy",
   "publisher": "AdrianoRuberto",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.87.0"
   },
@@ -29,6 +29,16 @@
             "it"
           ],
           "description": "The languages that your project support. It will be asked a traduction for every languages"
+        },
+        "localazy.namespace": {
+          "type": "string",
+          "default": "global",
+          "description": "The namespace in which the key should be added"
+        },
+        "localazy.skipPromptNamespace": {
+          "type": "boolean",
+          "default": true,
+          "description": "Skip the prompt for the namespace"
         }
       }
     },

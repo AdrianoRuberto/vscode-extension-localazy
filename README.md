@@ -28,6 +28,8 @@ Extension Settings
 This extension contributes the following settings:
 
 *   `localazy.languages`: The languages that you want to add translation to (default to `["fr", "en", "de", "it"]`).
+*   `localazy.namespace`: The namespace of in which the keys will be added (default to `global`).
+*   `localazy.skipPromptNamespace`: Skip the prompt for the namespace (default to `true`).
 
 Known Issues
 ------------

@@ -29,12 +29,15 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	const localazyAddKey = vscode.commands.registerCommand("localazy.addKey", async () => {
-		const languages = vscode.workspace.getConfiguration("localazy").get("languages");
-		if (!Array.isArray(languages)) {
-			throw new Error("localazy.languages setting should be an array");
+		const localazyConfig = vscode.workspace.getConfiguration("localazy");
+		const languages = localazyConfig.get<string[]>("languages");
+
+		if (!languages) {
+			vscode.window.showErrorMessage("'localazy.languages' setting should be an array of string");
+			return;
 		}
 
-		const accessToken = context.workspaceState.get("localazy.access_token");
+		const accessToken = context.workspaceState.get<string>("localazy.access_token");
 		if (!accessToken) {
 			vscode.window.showErrorMessage("No access token found, use 'Localazy connect' to add one");
 			return;
@@ -56,7 +59,17 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		const ns = await vscode.window.showInputBox({ title: "namespace (ie: global)", ignoreFocusOut: true });
+		const ns = await (async () => {
+			const namespace = localazyConfig.get<string>("namespace");
+			const skip = localazyConfig.get<boolean>("skipPromptNamespace");
+
+			if (skip) {
+				return namespace;
+			}
+
+			return vscode.window.showInputBox({ title: "namespace", value: namespace, ignoreFocusOut: true });
+		})();
+
 
 		const content: Record<string, any> = { "type": "json" };
 		for (const lang of languages) {

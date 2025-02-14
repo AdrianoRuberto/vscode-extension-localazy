@@ -4,6 +4,10 @@ All notable changes to the "localazy" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## 0.0.3
+- Add `localazy.namespace` setting
+- Add `localazy.skipPromptNamespace` setting
+
 ## 0.0.2
 - Remove undici dependency
 
